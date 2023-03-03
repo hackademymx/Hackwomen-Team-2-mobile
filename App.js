@@ -1,20 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView,StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import RegistroLugares from './Views/RegistroLugares';
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <ScrollView>
+   <SafeAreaView style={styles.container}> 
+      <RegistroLugares/>
+  </SafeAreaView>
+  </ScrollView>);
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#841881',
+   
   },
 });
