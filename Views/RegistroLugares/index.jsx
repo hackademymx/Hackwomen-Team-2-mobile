@@ -1,10 +1,10 @@
 import React from 'react';
-
 import{Text, View, StyleSheet} from 'react-native';
-
 import MyTextInput from '../../components/textInput';
-
 import Button from '../../components/button';
+import AñadirFoto from '../../components/buttonpic';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const RegistroLugares = () => {
 
@@ -91,7 +91,8 @@ const RegistroLugares = () => {
 
     return (
         <View style={styles.container}> 
-            <Text style={styles.title} >Añadir</Text>
+            
+            <FontAwesomeIcon  style= {styles.plus} icon={faPlus} size={80} color="white"/><Text style={styles.title}>Añadir</Text>
                 <MyTextInput
                     
                     label="Nombre"
@@ -146,7 +147,10 @@ const RegistroLugares = () => {
                     setValue={setZipcode}
                     errorMsg={errorZipcode} 
                     />
-                <Button text= "Registrar lugar" onClick={Registrar}/>
+
+                <AñadirFoto onClick={Registrar}/>
+                <Button text= "Registrar lugar"
+                 onClick={Registrar}/>
                 
             
         </View>
@@ -172,6 +176,10 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         
     },
+
+    plus:{
+        
+    }
 
 
 });

@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView,StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import RegistroLugares from './Views/RegistroLugares';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
+
 
 
 export default function App() {
@@ -8,6 +11,7 @@ export default function App() {
     <ScrollView>
    <SafeAreaView style={styles.container}> 
       <RegistroLugares/>
+      
   </SafeAreaView>
   </ScrollView>);
 }

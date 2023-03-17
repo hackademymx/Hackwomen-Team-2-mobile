@@ -15,7 +15,7 @@ export  default function Button({onClick, text}){
 const styles = StyleSheet.create({
     button: {
         backgroundColor:"#ffffff",
-        borderRadius: 8,
+        borderRadius: 12,
         display:"flex", 
         justifyContent:"center",
         alignItems: "center",
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     text: {
         fontWeight:"bold",
         color:"#fffff",
+        fontSize: 18,
     }
 })
 
