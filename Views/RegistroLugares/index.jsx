@@ -1,31 +1,65 @@
-import React from 'react';
+import React, {useState} from 'react';
 import{Text, View, StyleSheet} from 'react-native';
 import MyTextInput from '../../components/textInput';
 import Button from '../../components/button';
 import AñadirFoto from '../../components/buttonpic';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 const RegistroLugares = () => {
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [state, setState] = useState('');
+    const [city, setCity] = useState('');
+    const [suburb, setSuburb] = useState('');
+    const [street, setStreet] = useState('');
+    const [postcode, setPostcode] = useState('');
 
-    const [name, setName] = React.useState('');
-    const [description, setDescription] = React.useState('');
-    const [state, setState] = React.useState('');
-    const [city, setCity] = React.useState('');
-    const [province, setProvince] = React.useState('');
-    const [street, setStreet] = React.useState('');
-    const [zipcode, setZipcode] = React.useState('');
+    const [errorName, setErrorName] = useState("");
+    const [errorDescription, setErrorDescription] = useState("");
+    const [errorState, setErrorState] = useState("");
+    const [errorCity, setErrorCity] = useState("");
+    const [errorSuburb, setErrorSuburb] = useState("");
+    const [errorStreet, setErrorStreet] = useState("");
+    const [errorPostcode, setErrorPostcode] = useState("");
 
-    const [errorName, setErrorName] = React.useState("");
-    const [errorDescription, setErrorDescription] = React.useState("");
-    const [errorState, setErrorState] = React.useState("");
-    const [errorCity, setErrorCity] = React.useState("");
-    const [errorProvince, setErrorProvince] = React.useState("");
-    const [errorStreet, setErrorStreet] = React.useState("");
-    const [errorZipcode, setErrorZipcode] = React.useState("");
+    const baseUrl = 'https://lugaressegurosv3.azurewebsites.net/places'
+    const savePlace = async () => {
+        try{
+            const response = await axios({
+                method:'post',
+                url: baseUrl,
+                data: {
+                    name, 
+                    description, 
+                    state, 
+                    city, 
+                    suburb, 
+                    street, 
+                    postcode
+                }
+            });
+            console.log(response.data);
+            setName("")
+            setDescription ("")
+            setState ("")
+            setCity ("")
+            setSuburb ("") 
+            setStreet ("")
+            setPostcode ("") 
 
+            alert("Registro exitoso :D ")
+            return {response}
+       
+        }catch (error){
+         alert("Ocurrio un error al hacer la peticion")
+        console.log(error)
+        }
+    }
 
     const Registrar=() => {
+        console.log(name);
 
         /*// Mensajes de Error /*/
         if (name=== ""){
@@ -60,12 +94,12 @@ const RegistroLugares = () => {
 
 
 
-        if (province=== ""){
-            return setErrorProvince("Completar el campo colonia");
+        if (suburb=== ""){
+            return setErrorSuburb("Completar el campo colonia");
 
         }
 
-        setErrorProvince(" ")
+        setErrorSuburb(" ")
         
         if (street=== ""){
             return setErrorStreet("Completar el campo calle");
@@ -74,13 +108,13 @@ const RegistroLugares = () => {
 
         setErrorStreet("")
         
-        if (zipcode=== ""){
-            return setErrorZipcode("Completar el campo codigo postal");
+        if (postcode=== ""){
+            return setErrorPostcode("Completar el campo codigo postal");
 
 
         }
 
-        setErrorZipcode("")
+        setErrorPostcode("")
 
 
         alert(`${name} ha sido registrado correctamente`);
@@ -90,6 +124,7 @@ const RegistroLugares = () => {
     };
 
     return (
+
         <View style={styles.container}> 
             
             <FontAwesomeIcon  style= {styles.plus} icon={faPlus} size={80} color="white"/><Text style={styles.title}>Añadir</Text>
@@ -105,7 +140,7 @@ const RegistroLugares = () => {
                     
                     label="Descripcion" 
                     value= {description} 
-                    setValue= {setDescription}
+                    setValue=  {setDescription}
                     errorMsg={errorDescription}
                     />
 
@@ -113,44 +148,46 @@ const RegistroLugares = () => {
                     
                     label="Estado" 
                     value= {state}  
-                    setValue={setState}
+                    setValue= {setState}
                     errorMsg={errorState} />
 
                 <MyTextInput 
                     
                     label="Ciudad" 
                     value= {city} 
-                    setValue={setCity}
+                    setValue= {setCity}
                     errorMsg={errorCity}
                     />
 
                 <MyTextInput 
                     
                     label="Colonia" 
-                    value= {province}
-                    setValue={setProvince}
-                    errorMsg={errorProvince}
+                    value= {suburb}
+                    setValue= {setSuburb}
+                    errorMsg={errorSuburb}
                     />
 
+              
                 <MyTextInput 
                      
                     label="Calle" 
                     value= {street} 
-                    setValue={setStreet}
+                    setValue= {setStreet}
                     errorMsg={errorStreet}
                     />
 
                 <MyTextInput 
                    
-                    label="Codigo postal" 
-                    value= {zipcode} 
-                    setValue={setZipcode}
-                    errorMsg={errorZipcode} 
-                    />
+                   label="Codigo postal" 
+                   value= {postcode} 
+                   setValue= {setPostcode}
+                   errorMsg={errorPostcode} 
+                   />
+
 
                 <AñadirFoto onClick={Registrar}/>
                 <Button text= "Registrar lugar"
-                 onClick={Registrar}/>
+                 onClick={savePlace}/>
                 
             
         </View>
@@ -185,3 +222,131 @@ const styles = StyleSheet.create({
 });
 
 export default RegistroLugares;
+
+// const RegistroLugares = () => {
+
+//     const [place, setPlace] = useState({
+//         name: "",
+//         description: "",
+//         address: "",
+//     });
+
+//     const [errors,setErrors] = useState({
+//         name: {
+//             text: 'Complete el campo nombre',
+//             status: false,
+//         },
+
+//         description: { 
+//             text: 'Complete el campo descripción',
+//             status: false,
+//         },
+//         address: {
+//             text: 'Complete el campo dirección',
+//             status: false,
+//         }
+//     })
+   
+
+//     const [errorName, setErrorName] = useState("");
+//     const [errorDescription, setErrorDescription] = useState("");
+//     const [errorAddress, setErrorAddress] = useState("");
+
+    
+//     const Registrar = () => {
+//         let newErrors = errors;
+//          for (let property in place) {
+            
+//              if (place[property] === ""){
+//                  newErrors = {
+//                     [property]: {
+//                     ...newErrors[property],
+//                         status: true}
+//                  }
+//              };
+//         }
+//          setErrors(newErrors);
+//     }
+
+
+    
+  
+  
+
+// //minuto 6 video automatizacion
+//     const changePlaceProperties = (property, text) => {
+//         setPlace({
+//             ...place,
+//             [property]: text,
+//         });
+//     }
+
+//     return (
+//         <View style={styles.container}> 
+            
+//             <FontAwesomeIcon  style= {styles.plus} icon={faPlus} size={80} color="white"/><Text style={styles.title}>Añadir</Text>
+//                 <MyTextInput
+                    
+//                     label="Nombre"
+//                     value= {place.name} 
+//                     setValue= {(text) => changePlaceProperties("name", text)}
+//                     errorMsg={errors.name.status && errors.name.text}
+//                     />
+
+//                 <MyTextInput 
+                    
+//                     label="Descripcion" 
+//                     value= {place.description} 
+//                     setValue= {(text) => changePlaceProperties("description", text)}
+//                     errorMsg={errors.description.status && errors.description.text}
+//                     />
+
+//                 <MyTextInput 
+                    
+//                     label="Address" 
+//                     value= {place.address}  
+//                     setValue={(text) => changePlaceProperties("Address", text)}
+//                     errorMsg={errors.address.status && errors.address.text} 
+//                     />
+
+        
+
+//                 <AñadirFoto onClick={Registrar}/>
+//                 <Button text= "Registrar lugar"
+//                  onClick={Registrar}/>
+                
+            
+//         </View>
+//     );
+// };
+
+// const styles = StyleSheet.create({
+//     container: { 
+//     flex:1,
+//     display:'flex',
+//     flexDirection:'column',
+//     padding:10, 
+//     marginBottom: 5,   
+//     },
+//     title: {
+//         fontSize:40,
+//         fontWeight:'bold',
+//         letterSpacing:2,
+//         marginBottom:10,
+//         justifyContent:'center',
+//         marginLeft:130,
+//         marginTop:10,
+//         color: "#ffffff",
+        
+//     },
+
+//     plus:{
+        
+//     }
+
+
+// });
+
+// export default RegistroLugares;
+
+

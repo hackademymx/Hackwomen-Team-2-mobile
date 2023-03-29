@@ -10,8 +10,7 @@ const MyTextInput = ({label = "", value, setValue, errorMsg}) => {
             <TextInput
              value={value} 
              style={styles.contenedor} 
-             onChangeText= {text => setValue(text)}/>
-          {/* //  <TextInput value={value} style={descstyles.desccontenedor} onChangeText= {text => setValue(text)}/> */}
+             onChangeText= {(text) => setValue(text)}/>
         <Text style={styles.errorMsg}>{errorMsg}</Text>
         </View>
         
