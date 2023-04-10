@@ -147,7 +147,7 @@ const RegistroLugares = () => {
         <ScrollView>
         <View style={styles.container}> 
             
-            <FontAwesomeIcon  /><Text style={styles.title}>Añadir</Text>
+            <Text style={styles.title}>Añadir</Text>
                 <MyTextInput
                     
                     label="Nombre"

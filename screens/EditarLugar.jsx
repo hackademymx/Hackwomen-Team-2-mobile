@@ -153,7 +153,7 @@ const EditarLugar = ({route}) => {
 
         <View style={styles.container}> 
             <ScrollView>
-            <FontAwesomeIcon  style= {styles.plus} size={80} color="white"/><Text style={styles.title}>Editar</Text>
+            <Text style={styles.title}>Editar</Text>
                 <MyTextInput
                     
                     label="Nombre"
