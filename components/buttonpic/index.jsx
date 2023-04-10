@@ -12,7 +12,7 @@ export  default function AñadirFoto({onClick, text}){
         <TouchableOpacity onPress= {onClick} >
             <View style={styles.button}>
                 <Text style={styles.text}>{text}</Text>
-                <FontAwesomeIcon icon={ faCamera } size="70" color= 'white' />
+                <FontAwesomeIcon icon={ faCamera } size={70} color= 'white' />
             </View>
         </TouchableOpacity>
           
